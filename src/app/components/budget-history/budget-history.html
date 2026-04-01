@@ -1,1 +1,7 @@
-<p>budget-history works!</p>
+<aside class="history-section" aria-labelledby="history-title">
+  <h2 id="history-title">Pressupostos en curs</h2>
+
+  <app-budget-search></app-budget-search>
+
+  <app-budget-list [budgets]="budgetService.budgetHistory()"></app-budget-list>
+</aside>

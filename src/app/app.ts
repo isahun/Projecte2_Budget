@@ -7,7 +7,7 @@ import { BudgetHistory } from './components/budget-history/budget-history';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, BudgetCalculator, BudgetForm, BudgetHistory],
+  imports: [Header, BudgetCalculator, BudgetForm, BudgetHistory],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
