@@ -1,0 +1,51 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.sort-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sort-controls span {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #666;
+  width: 100%; /* Força el salt de línia si vols el títol a dalt */
+}
+
+.sort-controls button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid #00c091;
+  background: white;
+  color: #00c091;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sort-controls button.active {
+  background: #00c091;
+  color: white;
+}
+
+.sort-controls button:hover {
+  background: #e6f9f4;
+}
