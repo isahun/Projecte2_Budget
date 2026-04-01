@@ -9,7 +9,7 @@ import { BudgetHistory } from './components/budget-history/budget-history';
   selector: 'app-root',
   imports: [Header, BudgetCalculator, BudgetForm, BudgetHistory],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('budget-app');

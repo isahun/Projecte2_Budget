@@ -4,6 +4,8 @@ export interface Service {
   description: string;
   price: number;
   isSelected: boolean;
+  pages?: number;
+  languages?: number;
 }
 
 export interface Budget {

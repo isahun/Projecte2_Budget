@@ -18,6 +18,20 @@ export class BudgetForm {
 
   submitBudget() {
     if (this.budgetForm.valid) {
+      const selectedServices = this.budgetService
+        .services()
+        .filter((s) => s.isSelected)
+        .map((s) => {
+          if (s.id === 'web') {
+            return {
+              ...s,
+              pages: this.budgetService.numPages(),
+              languages: this.budgetService.numLanguages(),
+            };
+          }
+          return s;
+        });
+
       //si form vàlid, creem objecte pressupost
       const newBudget = {
         id: Date.now(),
@@ -25,9 +39,9 @@ export class BudgetForm {
         clientEmail: this.budgetForm.value.email as string,
         clientPhone: this.budgetForm.value.phone as string,
         //filtrem només serveis seleccionats en el moment
-        services: this.budgetService.services().filter(s => s.isSelected),
+        services: selectedServices,
         total: this.budgetService.totalPrice(),
-        date: new Date()
+        date: new Date(),
       };
 
       //enviem a recepció
@@ -36,6 +50,4 @@ export class BudgetForm {
       this.budgetForm.reset();
     }
   }
-
-
 }

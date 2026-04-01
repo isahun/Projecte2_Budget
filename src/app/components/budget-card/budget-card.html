@@ -7,10 +7,17 @@
   </div>
 
   <div class="services-list">
-    <strong>Serveis:</strong>
+    <strong>Serveis contractats:</strong>
     <ul>
       @for (s of budget.services; track s.id){
-      <li>{{ s.name }}</li>
+      <li>
+        {{ s.name }}
+        @if (s.id === 'web') {
+        <span class="details">
+          ({{ s.pages }} pàgines, {{ s.languages }} idiomes)
+        </span>
+        }
+      </li>
       }
     </ul>
   </div>

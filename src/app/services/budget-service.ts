@@ -44,8 +44,7 @@ export class BudgetService {
 
   addBudget(newBudget: Budget) {
     //afegim nou pressssu a la llista (Signal) i fem servir operador spread x crear llista nova amb el nou element
-    this.budgetHistory.update(currentHistory => [...currentHistory, newBudget]);
-    
+    this.budgetHistory.update((currentHistory) => [newBudget, ...currentHistory]);
   }
 
   constructor() {} //ho deixem per si hem d'injectar altres eines com la de fer trucades a API externa
