@@ -20,14 +20,20 @@ export class BudgetForm {
     if (this.budgetForm.valid) {
       //si form vàlid, creem objecte pressupost
       const newBudget = {
-        ...this.budgetForm.value,
+        id: Date.now(),
+        clientName: this.budgetForm.value.name as string,
+        clientEmail: this.budgetForm.value.email as string,
+        clientPhone: this.budgetForm.value.phone as string,
+        //filtrem només serveis seleccionats en el moment
+        services: this.budgetService.services().filter(s => s.isSelected),
         total: this.budgetService.totalPrice(),
         date: new Date()
       };
 
-      console.log('Pressupost llest per guardar:', newBudget);
-
-      this.budgetForm.reset(); //netegem form dp d'enviar
+      //enviem a recepció
+      this.budgetService.addBudget(newBudget);
+      //netegem form dp d'enviar
+      this.budgetForm.reset();
     }
   }
 
