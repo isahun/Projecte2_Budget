@@ -1,0 +1,79 @@
+.form-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00c091; /* El verd del projecte */
+  box-shadow: 0 0 0 3px rgba(0, 192, 145, 0.1);
+}
+
+/* Estils per als errors (Accessibilitat visual) */
+.error {
+  color: #dc3545;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+/* El botó d'acció */
+.btn-submit {
+  width: 100%;
+  padding: 1rem;
+  background-color: #00c091;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: #00a87d;
+  transform: translateY(-2px);
+}
+
+.btn-submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
