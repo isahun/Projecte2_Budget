@@ -5,7 +5,6 @@ import { services } from '../core/data/services-obj';
 @Injectable({
   providedIn: 'root',
 })
-
 export class BudgetService {
   // 1. La llista de serveis disponibles (les nostres "cards")
   // Fem servir un Signal per saber quan l'usuari els marca/desmarca
@@ -20,20 +19,28 @@ export class BudgetService {
   totalPrice = computed(() => {
     //Sumem el preu dels serveis seleccionats
     let total = this.services()
-      .filter (service => service.isSelected)
+      .filter((service) => service.isSelected)
       .reduce((acc, service) => acc + service.price, 0);
 
     // Si la web està seleccionada, afegim el cost extra
-      const isWebSelected = this.services().find( service => service.id === 'web')?.isSelected;
-      if (isWebSelected) {
-        total += (this.numPages() + this.numLanguages()) * 30;
-      }
+    const isWebSelected = this.services().find((service) => service.id === 'web')?.isSelected;
+    if (isWebSelected) {
+      total += (this.numPages() + this.numLanguages()) * 30;
+    }
 
-      return total;
+    return total;
   });
 
   // 4. L'històric de pressupostos (la nostra base de dades local)
   budgetHistory = signal<Budget[]>([]); //<Budget[]> defineix tipus, i ([]) estableix com a valor inicial del signal un array buit
+
+  updateServiceSelection(id: string) {
+    this.services.update((prevServices) =>
+      prevServices.map((service) =>
+        service.id === id ? { ...service, isSelected: !service.isSelected } : service,
+      ),
+    );
+  }
 
   constructor() {} //ho deixem per si hem d'injectar altres eines com la de fer trucades a API externa
 }
