@@ -1,1 +1,31 @@
-<p>budget-form works!</p>
+<section class="form-container" aria-labelledby="form-title">
+  <h2 id="form-title">Dades del client</h2>
+
+  <form [formGroup]="budgetForm" (ngSubmit)="submitBudget()" novalidate>
+    <div class="field">
+      <label for="name">Nom i cognoms</label>
+      <input id="name" type="text" formControlName="name" placeholder="Escriu el teu nom">
+      @if (budgetForm.get('name')?.invalid && budgetForm.get('name')?.touched) {
+        <span class="error" role="alert">El nom és obligatori (mínim 3 caràcters)</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="phone">Telèfon</label>
+      <input id="phone" type="tel" formControlName="phone" placeholder="Ex: 666777888">
+      @if (budgetForm.get('phone')?.invalid && budgetForm.get('phone')?.touched) {
+        <span class="error" role="alert">Has d'introduir un telèfon de 9 dígits.</span>
+      }
+    </div>
+
+    <div class="field">
+      <label for="email">Correu electrònic</label>
+      <input id="email" type="email" formControlName="email" placeholder="nom@exemple.com">
+      @if (budgetForm.get('email')?.invalid && budgetForm.get('email')?.touched) {
+        <span class="error" role="alert">Has d'introduir un correu electrònic vàlid</span>
+      }
+    </div>
+
+    <button type="submit" [disabled]="budgetForm.invalid" class="btn-submit">Sol·licitar pressupost</button>
+  </form>
+</section>
