@@ -1,0 +1,35 @@
+.service-card {
+  border: 2px solid #eee;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* El "glow" verd quan està seleccionada */
+.service-card.selected {
+  border-color: #00c091; /* Verd del mockup */
+  background-color: #f9fffdfa;
+}
+
+.service-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+/* Estil per al checkbox accessible */
+.selection-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
