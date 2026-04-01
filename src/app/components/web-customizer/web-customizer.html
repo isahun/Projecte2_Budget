@@ -1,1 +1,21 @@
-<p>web-customizer works!</p>
+<div class="customizer-panel" role="group" aria-labelledby="customizer-title">
+  <h4 id="customizer-title" class="sr-only">Personalització de la web</h4>
+
+  <div class="control-group">
+    <label for="pages">Número de pàgines</label>
+    <div class="input-stepper">
+      <button type="button" (click)="updatePages(-1)" aria-label="Restar una pàgina">-</button>
+      <input type="number" id="pages" [value]="budgetService.numPages()" readonly>
+      <button type="button" (click)="updatePages(1)" aria-label="Sumar una pàgina">+</button>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="languages">Número d'idiomes</label>
+    <div class="input-stepper">
+      <button type="button" (click)="updateLanguages(-1)" aria-label="Restar un idioma">-</button>
+      <input type="number" id="languages" [value]="budgetService.numLanguages()" readonly>
+      <button type="button" (click)="updateLanguages(1)" aria-label="Sumar un idioma">+</button>
+    </div>
+  </div>
+
