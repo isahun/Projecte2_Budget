@@ -1,1 +1,19 @@
-<p>budget-card works!</p>
+<article class="budget-item">
+  <div class="client-info">
+    <h3>{{ budget.clientName }}</h3>
+    <p>{{ budget.clientEmail }}</p>
+  </div>
+
+  <div class="services-list">
+    <strong>Serveis:</strong>
+    <ul>
+      @for (s of budget.services; track s.id){
+      <li>{{ s.name }}</li>
+      }
+    </ul>
+  </div>
+
+  <div class="price-info">
+    <p>Total: <strong>{{ budget.total }}€</strong></p>
+  </div>
+</article>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Budget } from '../../interfaces/budget-service.interface';
 
 @Component({
   selector: 'app-budget-card',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './budget-card.html',
   styleUrl: './budget-card.css',
 })
-export class BudgetCard {}
+export class BudgetCard {
+  @Input({ required: true }) budget!: Budget;
+}
