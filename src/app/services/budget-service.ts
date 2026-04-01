@@ -1,20 +1,29 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { Service, Budget } from '../interfaces/budget-service.interface';
 import { services } from '../core/data/services-obj';
+import { supabase } from '../config/supabase.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetService {
+  // --- 1. ESTAT DE DADES ---
+
   // 1. La llista de serveis disponibles (les nostres "cards")
   // Fem servir un Signal per saber quan l'usuari els marca/desmarca
   services = signal<Service[]>(services);
-
   // 2. Les variables de la web (pàgines i idiomes)
   numPages = signal(1); //1 --> valor q apareix x defecte
   numLanguages = signal(1);
+  // 3. L'històric de pressupostos (la nostra base de dades local)
+  budgetHistory = signal<Budget[]>([]); //<Budget[]> defineix tipus, i ([]) estableix com a valor inicial del signal un array buit
 
-  // 3. EL CÀLCUL (La part intel·ligent)
+  // --- 2. ESTAT DE LA UI (Filtres/Ordre) ---
+  searchTerm = signal<string>('');
+  sortBy = signal<'date' | 'name' | 'amount'>('date');
+  sortOrder = signal<'asc' | 'desc'>('desc');
+
+  // --- 3. CÀLCULS DERIVATS (Computed) ---
   // El "computed" és un Signal que es calcula sol quan canvien els altres. Angular està vigilant: si l'usuari marca un checkbox o canvia el número de pàgines, el totalPrice es recalcula sol i l'envia a la pantalla.
   totalPrice = computed(() => {
     //Sumem el preu dels serveis seleccionats
@@ -30,26 +39,6 @@ export class BudgetService {
 
     return total;
   });
-
-  // 4. L'històric de pressupostos (la nostra base de dades local)
-  budgetHistory = signal<Budget[]>([]); //<Budget[]> defineix tipus, i ([]) estableix com a valor inicial del signal un array buit
-
-  updateServiceSelection(id: string) {
-    this.services.update((prevServices) =>
-      prevServices.map((service) =>
-        service.id === id ? { ...service, isSelected: !service.isSelected } : service,
-      ),
-    );
-  }
-
-  addBudget(newBudget: Budget) {
-    //afegim nou pressssu a la llista (Signal) i fem servir operador spread x crear llista nova amb el nou element
-    this.budgetHistory.update((currentHistory) => [newBudget, ...currentHistory]);
-  }
-
-  searchTerm = signal<string>('');
-  sortBy = signal<'date' | 'name' | 'amount'>('date');
-  sortOrder = signal<'asc' | 'desc'>('desc');
 
   filteredBudgets = computed(() => {
     let history = [...this.budgetHistory()]; //copia x no espatllar original
@@ -86,11 +75,63 @@ export class BudgetService {
     return history.filter((b) => b.clientName.toLowerCase().includes(term));
   });
 
+  // --- 4. CONSTRUCTOR ---
+  constructor() {
+    this.fetchBudgets();
+  }
+
+  // --- 5. MÈTODES D'ACCIÓ ---
+  // ACCIÓ: Llegir de Supabase
+  async fetchBudgets() {
+    const { data, error } = await supabase
+      .from('budgets')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (data) {
+      // Mapegem el que ve de la DB (snake_case) al nostre format (camelCase)
+      const mappedBudgets: Budget[] = data.map((b: any) => ({
+        id: b.id,
+        clientName: b.client_name,
+        clientEmail: b.client_email,
+        clientPhone: b.client_phone,
+        total: b.total,
+        services: b.services,
+        date: new Date(b.created_at),
+      }));
+      this.budgetHistory.set(mappedBudgets);
+    }
+  }
+
+  // ACCIÓ: Guardar a Supabase
+  async addBudget(newBudget: Budget) {
+    const { error } = await supabase.from('budgets').insert([
+      {
+        client_name: newBudget.clientName,
+        client_email: newBudget.clientEmail,
+        client_phone: newBudget.clientPhone,
+        total: newBudget.total,
+        services: newBudget.services,
+      },
+    ]);
+
+    if (!error) {
+      await this.fetchBudgets(); // Refresquem la llista
+    }
+  }
+
+  updateServiceSelection(id: string) {
+    this.services.update((prevServices) =>
+      prevServices.map((s) =>
+        s.id === id ? { ...s, isSelected: !s.isSelected } : s,
+      ),
+    );
+  }
+
+
   resetFilters() {
     this.searchTerm.set('');
     this.sortBy.set('date');
     this.sortOrder.set('desc');
   }
-
-  constructor() {} //ho deixem per si hem d'injectar altres eines com la de fer trucades a API externa
 }
