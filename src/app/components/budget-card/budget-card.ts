@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Budget } from '../../interfaces/budget-service.interface';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-budget-card',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './budget-card.html',
   styleUrl: './budget-card.css',
 })
