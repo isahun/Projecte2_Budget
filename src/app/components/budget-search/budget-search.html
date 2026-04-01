@@ -1,1 +1,30 @@
-<p>budget-search works!</p>
+<div class="sort-controls">
+  <span>Ordenar per:</span>
+
+  <button type="button" (click)="changeSort('date')" [class.active]="budgetService.sortBy() === 'date'">
+    Data
+    @if (budgetService.sortBy() === 'date') {
+    {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
+    }
+  </button>
+
+  <button type="button" (click)="changeSort('name')" [class.active]="budgetService.sortBy() === 'name'">
+    Nom
+  </button>
+
+  <button type="button" (click)="changeSort('amount')" [class.active]="budgetService.sortBy() === 'amount'">
+    Import
+    @if (budgetService.sortBy() === 'amount') {
+    {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
+    }
+  </button>
+</div>
+
+<div class="search-container">
+  <label for="search" class="sr-only">Cercar per nom</label><span class="search-icon">🔍</span>
+  <input id="search" type="text" placeholder="Cerca per nom de client" (input)="onSearch($event)">
+</div>
+
+<button type="button" (click)="budgetService.resetFilters()" class="btn-reset">
+  Netejar filtres
+</button>

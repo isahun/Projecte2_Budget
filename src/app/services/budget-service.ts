@@ -47,5 +47,50 @@ export class BudgetService {
     this.budgetHistory.update((currentHistory) => [newBudget, ...currentHistory]);
   }
 
+  searchTerm = signal<string>('');
+  sortBy = signal<'date' | 'name' | 'amount'>('date');
+  sortOrder = signal<'asc' | 'desc'>('desc');
+
+  filteredBudgets = computed(() => {
+    let history = [...this.budgetHistory()]; //copia x no espatllar original
+    const term = this.searchTerm().toLowerCase();
+
+    // Primer: Filtrem pel nom
+    if (term) {
+      history = history.filter((b) => b.clientName.toLowerCase().includes(term));
+    }
+
+    // Segon: Ordenem segons el que l'usuari hagi triat
+    history.sort((a, b) => {
+      if (this.sortBy() === 'date') {
+        return this.sortOrder() === 'desc'
+          ? b.date.getTime() - a.date.getTime()
+          : a.date.getTime() - b.date.getTime();
+      }
+
+      if (this.sortBy() === 'amount') {
+        return this.sortOrder() === 'desc' ? b.total - a.total : a.total - b.total;
+      }
+
+      if (this.sortBy() === 'name') {
+        const comparison = a.clientName.localeCompare(b.clientName);
+        // Si l'ordre és 'desc', multipliquem per -1 per capgirar el resultat
+        return this.sortOrder() === 'asc' ? comparison : comparison * -1;
+      }
+
+      return 0;
+    });
+
+    if (!term) return history;
+
+    return history.filter((b) => b.clientName.toLowerCase().includes(term));
+  });
+
+  resetFilters() {
+    this.searchTerm.set('');
+    this.sortBy.set('date');
+    this.sortOrder.set('desc');
+  }
+
   constructor() {} //ho deixem per si hem d'injectar altres eines com la de fer trucades a API externa
 }
