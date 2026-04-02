@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 import { BudgetCard } from '../budget-card/budget-card';
 import { Budget } from '../../interfaces/budget-service.interface';
 import { BudgetService } from '../../services/budget-service';
@@ -11,7 +11,7 @@ import { BudgetService } from '../../services/budget-service';
 })
 export class BudgetList {
 
-  @Input({ required: true }) budgets: Budget[] = [];
+  budgets = input.required<Budget[]>();
   public budgetService = inject(BudgetService);
 
   onDeleteBudget(id: number) {
