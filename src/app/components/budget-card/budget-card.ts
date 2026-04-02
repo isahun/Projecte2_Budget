@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Budget } from '../../interfaces/budget-service.interface';
 import { DatePipe } from '@angular/common';
 @Component({
@@ -8,5 +8,11 @@ import { DatePipe } from '@angular/common';
   styleUrl: './budget-card.css',
 })
 export class BudgetCard {
-  @Input({ required: true }) budget!: Budget;
+  budget = input.required<Budget>();
+  deleteRequest = output<number>();
+
+  onDelete() {
+    console.log('1. Clic rebut a la card per ID:', this.budget().id);
+    this.deleteRequest.emit(this.budget().id)
+  }
 }
