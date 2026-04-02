@@ -1,12 +1,15 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { supabase } from './../config/supabase.config';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { Service, Budget } from '../interfaces/budget-service.interface';
 import { services } from '../core/data/services-obj';
-import { supabase } from '../config/supabase.config';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetService {
+  private supabase = inject(SupabaseClient);
+
   // --- 1. ESTAT DE DADES ---
 
   // 1. La llista de serveis disponibles (les nostres "cards")
@@ -120,6 +123,23 @@ export class BudgetService {
     }
   }
 
+  //ACCIÓ: Delete de supabase
+  async deleteBudget(id: number) {
+    const { error } = await this.supabase
+    .from('budgets')
+    .delete()
+    .eq('id', id);
+
+    if (error) {
+      console.error('Error en esborrar:', error);
+      return;
+    }
+    console.log('✅ Esborrat correctament de la DB');
+    //Actualitzem signal local
+    this.budgetHistory.update(budgets => budgets.filter(b => b.id !== id));
+    }
+
+
   updateServiceSelection(id: string) {
     this.services.update((prevServices) =>
       prevServices.map((s) =>
@@ -127,7 +147,6 @@ export class BudgetService {
       ),
     );
   }
-
 
   resetFilters() {
     this.searchTerm.set('');
