@@ -1,8 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Colors Primaris */
+  --color-primary: #00c091;
+  --color-primary-hover: #00a87d;
+  --color-primary-light: rgba(0, 192, 145, 0.1);
+  --color-primary-bg: #f9fffdfa;
+
+  /* Paleta de Grisos (Contrast i Jerarquia) */
+  --color-dark: #333333;
+  --color-text: #555555;
+  --color-muted: #777777;
+  --color-light-gray: #dddddd;
+  --color-border: #eeeeee;
+  --color-bg-body: #f8f9fa;
+
+  /* Semàntica */
+  --color-error: #dc3545;
+  --color-white: #ffffff;
+
+  /* Layout i Ombres */
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --radius-sm: 10px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+
+  /* Tipografia */
+  --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
 body {
+  font-family: var(--font-main);
+  background-color: var(--bg-body);
+  color: var(--text-main);
   margin: 0;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa; 
-  color: #333;
+  line-height: 1.5;
+  font-size: 16px; /* Base per accessibilitat */
+}
+
+/* Accessibilitat: Navegació per teclat */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
 }

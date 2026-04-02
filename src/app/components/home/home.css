@@ -1,0 +1,26 @@
+.home-container {
+  display: flex;
+  flex-direction: column; /* Mòbil: Tot un sota l'altre */
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* BREAKPOINT 1: Tablets (768px) */
+@media (min-width: 768px) {
+  .home-container {
+    padding: 2rem;
+  }
+}
+
+/* BREAKPOINT 2: Desktop (1024px) */
+@media (min-width: 1024px) {
+  .home-container {
+    flex-direction: row; /* Dues columnes */
+    align-items: flex-start;
+  }
+
+  app-budget-form { flex: 1.2; } /* Formulari una mica més ample */
+  app-budget-history { flex: 0.8; position: sticky; top: 2rem; }
+}

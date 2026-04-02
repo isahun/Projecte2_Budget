@@ -1,29 +1,20 @@
-.hero-banner {
-  margin-top: 2rem;
-}
-
-.brand-name {
-  padding: 1rem 1rem;
-}
-
 .hero-content {
-  background-color: #d1f1e9;
-  padding: 3rem 1rem;
-  border-radius: 20px;
-  text-align: center;
-  margin: 1rem 1rem;
+  background: linear-gradient(135deg, #d1f1e9 0%, #a8e6cf 100%);
+  padding: 4rem 2rem;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
 }
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #333; /* Gris fosc per a bon contrast sobre el verd clar */
-  margin: 0;
+  font-size: 3rem; /* Una mica més gran */
+  letter-spacing: -1px;
 }
 
-.brand-name {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #555;
+/* Un detall discret: l'ombra del títol */
+h1::after {
+  content: " ⚔️"; /* Picada d'ullet al Senyor dels Anells */
+  font-size: 1.5rem;
+  vertical-align: middle;
+  opacity: 0.6;
 }

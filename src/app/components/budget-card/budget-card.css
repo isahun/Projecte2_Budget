@@ -1,51 +1,33 @@
 .budget-item {
-  background-color: white;
-  border-radius: 15px;
-  padding: 1.5rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.2rem;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr; /* Tres columnes: Client, Serveis, Preu */
-  align-items: center;
+  box-shadow: var(--shadow);
+  border-left: 6px solid var(--primary);
+  display: flex;
+  flex-direction: column; /* Stacked en mòbil */
   gap: 1rem;
-  border-left: 5px solid #00c091; /* El verd que identifica un pressupost tancat */
 }
 
-.client-info h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #333;
+@media (min-width: 600px) {
+  .budget-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
-.client-info p {
-  margin: 0.2rem 0 0;
-  font-size: 0.85rem;
-  color: #777;
+.client-info h3 { margin: 0; font-size: 1.2rem; }
+.total-amount { font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
+
+.delete-icon {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.services-list {
-  font-size: 0.9rem;
-}
-
-.services-list ul {
-  margin: 0.3rem 0 0;
-  padding-left: 1.2rem;
-  color: #555;
-}
-
-.price-info {
-  text-align: right;
-}
-
-.price-info p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #888;
-}
-
-.total-amount {
-  display: block;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #333;
-}
+.delete-icon:hover { background: #fee; border-color: var(--error); }
