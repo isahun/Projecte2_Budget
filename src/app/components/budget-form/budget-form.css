@@ -24,7 +24,7 @@ input {
 }
 
 input:focus {
-  border-color: var(--primary);
+  border-color: var(--color-primary);
 }
 
 .error-message {
@@ -37,7 +37,7 @@ input:focus {
 .btn-submit {
   width: 100%;
   padding: 1rem;
-  background-color: var(--primary);
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
