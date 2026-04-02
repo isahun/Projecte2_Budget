@@ -3,6 +3,8 @@
 
   <div class="control-group">
     <label for="pages">Número de pàgines</label>
+    <button type="button" (click)="openInfo('pages')">ⓘ</button>
+
     <div class="input-stepper">
       <button type="button" (click)="updatePages(-1)" aria-label="Restar una pàgina">-</button>
       <input type="number" id="pages" [value]="budgetService.numPages()" readonly>
@@ -12,6 +14,8 @@
 
   <div class="control-group">
     <label for="languages">Número d'idiomes</label>
+    <button type="button" (click)="openInfo('languages')">ⓘ</button>
+
     <div class="input-stepper">
       <button type="button" (click)="updateLanguages(-1)" aria-label="Restar un idioma">-</button>
       <input type="number" id="languages" [value]="budgetService.numLanguages()" readonly>
@@ -19,3 +23,6 @@
     </div>
   </div>
 
+  @if (isModalOpen()) {
+  <app-info-modal [text]="modalText()" (close)="isModalOpen.set(false)" />
+  }
