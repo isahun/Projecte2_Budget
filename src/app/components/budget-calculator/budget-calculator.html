@@ -1,0 +1,16 @@
+<section class="calculator-container">
+  @for (s of budgetService.services(); track s.id) {
+  <app-service-card [service]="s"></app-service-card>
+  @if (s.id === 'web' && s.isSelected) {
+  <app-web-customizer></app-web-customizer>
+  }
+  } @empty {
+  <p>No hi ha serveis disponibles.</p>
+  }
+
+
+
+  <div class="total display">
+    <p>Preu pressuposat: <span>{{ budgetService.totalPrice() }}€</span></p>
+  </div>
+</section>

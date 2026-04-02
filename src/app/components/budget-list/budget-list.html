@@ -1,0 +1,7 @@
+<section class="list-container">
+  @for (b of budgets; track b.id) {
+  <app-budget-card [budget]="b"></app-budget-card>
+  } @empty {
+  <p class="empty-msg">Encara no hi ha pressupostos guardats.</p>
+  }
+</section>

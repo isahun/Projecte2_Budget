@@ -1,0 +1,15 @@
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* Mòbil: una columna */
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 1.8fr 1.2fr; /* Desktop: Calc gran, Històric lateral */
+    align-items: start;
+  }
+}

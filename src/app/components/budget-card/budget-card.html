@@ -1,0 +1,28 @@
+<article class="budget-item">
+  <div class="client-info">
+    <h3>{{ budget.clientName }}</h3>
+    <p>{{ budget.clientEmail }}</p>
+    <p>{{ budget.clientPhone }}</p>
+    <p><small>{{ budget.date | date:'dd/MM/yyyy HH:mm' }}</small></p>
+  </div>
+
+  <div class="services-list">
+    <strong>Serveis contractats:</strong>
+    <ul>
+      @for (s of budget.services; track s.id){
+      <li>
+        {{ s.name }}
+        @if (s.id === 'web') {
+        <span class="details">
+          ({{ s.pages }} pàgines, {{ s.languages }} idiomes)
+        </span>
+        }
+      </li>
+      }
+    </ul>
+  </div>
+
+  <div class="price-info">
+    <p>Total: <strong>{{ budget.total }}€</strong></p>
+  </div>
+</article>
