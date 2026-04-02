@@ -1,6 +1,6 @@
 <section class="list-container">
-  @for (b of budgets; track b.id) {
-  <app-budget-card [budget]="b"></app-budget-card>
+  @for (budget of budgetService.budgetHistory(); track budget.id) {
+  <app-budget-card [budget]="budget" (deleteRequest)="onDeleteBudget($event)"></app-budget-card>
   } @empty {
   <p class="empty-msg">Encara no hi ha pressupostos guardats.</p>
   }
