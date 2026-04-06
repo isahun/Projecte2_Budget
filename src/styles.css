@@ -1,29 +1,29 @@
 :root {
   /* Colors Primaris */
   --color-primary: #00c091;
-  --color-primary-hover: #00a87d;
-  --color-primary-light: rgba(0, 192, 145, 0.1);
+  --color-primary-hover: #00684e;
+  --color-primary-light: #d9fbf3;
   --color-primary-bg: #f9fffdfa;
 
   /* Paleta de Grisos (Contrast i Jerarquia) */
   --color-dark: #333333;
   --color-text: #555555;
-  --color-muted: #777777;
-  --color-light-gray: #dddddd;
-  --color-border: #eeeeee;
-  --color-bg-body: #f8f9fa;
 
   /* Semàntica */
   --color-error: #dc3545;
   --color-white: #ffffff;
 
   /* Layout i Ombres */
-  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.05);
-  --radius-sm: 10px;
-  --radius-md: 15px;
-  --radius-lg: 20px;
+  --max-width: 1200px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --radius-md: 20px;
+  --radius-lg: 40px;
+
+  /* Escala d'espais */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
 
   /* Tipografia */
   --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -33,7 +33,7 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg-body);
+  background-color: var(--color-primary-bg);
   color: var(--text-main);
   margin: 0;
   line-height: 1.5;
