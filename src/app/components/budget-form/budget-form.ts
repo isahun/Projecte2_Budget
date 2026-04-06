@@ -17,8 +17,6 @@ export class BudgetForm {
   budgetForm = this.fb.group(validators);
 
   async submitBudget() {
-    console.log('Botó clicat!'); // Això ha de sortir a la consola (F12)
-
     if (this.budgetForm.valid) {
       const selectedServices = this.budgetService
         .services()
@@ -46,13 +44,10 @@ export class BudgetForm {
         date: new Date(),
       };
 
-      console.log('Enviant a Supabase...', newBudget);
-
       try {
         // 2. Esperem que el servei ens confirmi que s'ha guardat
         await this.budgetService.addBudget(newBudget);
 
-        console.log('✅ Èxit! Pressupost guardat al núvol.');
 
         // 3. Només si ha anat bé, netegem el formulari
       this.budgetForm.reset();

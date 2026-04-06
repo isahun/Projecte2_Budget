@@ -13,7 +13,7 @@ export interface Budget {
   clientName: string;
   clientEmail: string;
   clientPhone: string;
-  services: Omit<Service, 'isSelected'>[]; // "Agafa Service però treu-li el isSelected"
+  services: Omit<Service, 'isSelected'>[]; 
   total: number;
   date: Date;
 }
