@@ -7,10 +7,22 @@
   padding: var(--space-md);
 }
 
+.main-layout section {
+  text-align: center;
+  color: var(--color-primary-hover)
+}
+
+app-budget-calculator, app-budget-form, app-budget-history {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 /* BREAKPOINT 1: Tablets (768px) */
 @media (min-width: 768px) {
   .main-layout {
-    padding: 2rem;
+    padding: var(--space-lg);
     max-width: var(--max-width);
   }
 }
