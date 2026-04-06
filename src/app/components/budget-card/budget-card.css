@@ -6,7 +6,7 @@
   box-shadow: var(--shadow);
   border-left: 4px solid var(--color-primary-hover);
   display: flex;
-  flex-direction: column; /* Stacked en mòbil */
+  flex-direction: column; 
   gap: 1rem;
 }
 

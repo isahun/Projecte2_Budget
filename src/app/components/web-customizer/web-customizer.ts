@@ -24,7 +24,7 @@ export class WebCustomizer {
 
   updateLanguages(value: number) {
     const current = this.budgetService.numLanguages();
-    //Validem again
+
     if (value === -1 && current <= 1) return;
     this.budgetService.numLanguages.set(current + value);
   }

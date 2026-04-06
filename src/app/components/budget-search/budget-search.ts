@@ -16,12 +16,10 @@ export class BudgetSearch {
   }
 
   changeSort(criteria: 'date' | 'name' | 'amount') {
-    // 1. Si ja estàvem ordenant per aquest criteri, girem l'ordre (asc/desc)
     if (this.budgetService.sortBy() === criteria) {
       const newOrder = this.budgetService.sortOrder() === 'asc' ? 'desc' : 'asc';
       this.budgetService.sortOrder.set(newOrder);
     } else {
-      // 2. Si és un criteri nou, el canviem i posem l'ordre per defecte
       this.budgetService.sortBy.set(criteria);
       this.budgetService.sortOrder.set('desc');
     }

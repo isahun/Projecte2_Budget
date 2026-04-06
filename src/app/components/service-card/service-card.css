@@ -15,10 +15,9 @@
 
 }
 
-/* El "glow" verd quan està seleccionada */
 .service-card.selected {
-  border-color: #00c091; /* Verd del mockup */
-  background-color: #f9fffdfa;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-bg);
 }
 
 .info {
@@ -49,6 +48,6 @@
 .selection input[type="checkbox"] {
   width: 1.2rem;
   height: 1.2rem;
-  accent-color: var(--clr-pri);
+  accent-color: var(--color-primary);
   cursor: pointer;
 }

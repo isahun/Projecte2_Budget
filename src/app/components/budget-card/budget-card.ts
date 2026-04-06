@@ -12,7 +12,6 @@ export class BudgetCard {
   deleteRequest = output<number>();
 
   onDelete() {
-    console.log('1. Clic rebut a la card per ID:', this.budget().id);
-    this.deleteRequest.emit(this.budget().id)
+    this.deleteRequest.emit(this.budget().id);
   }
 }
