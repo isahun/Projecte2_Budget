@@ -1,15 +1,29 @@
 .main-layout {
   display: grid;
-  grid-template-columns: 1fr; /* Mòbil: una columna */
-  gap: 3rem;
-  max-width: 1200px;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--space-md);
 }
 
-@media (min-width: 1024px) {
+/* BREAKPOINT 1: Tablets (768px) */
+@media (min-width: 768px) {
   .main-layout {
-    grid-template-columns: 1.8fr 1.2fr; /* Desktop: Calc gran, Històric lateral */
-    align-items: start;
+    padding: 2rem;
+    max-width: var(--max-width);
   }
 }
+
+/* BREAKPOINT 2: Desktop (1024px) */
+@media (min-width: 1024px) {
+  .main-layout {
+    align-items: start;
+    padding: var(--space-xl) var(--space-md);
+    max-width: var(--max-width);
+  }
+
+  app-budget-history { position: sticky; top: var(--space-lg); }
+}
+
+
