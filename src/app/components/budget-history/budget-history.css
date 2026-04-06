@@ -1,32 +1,17 @@
 .history-section {
-  background-color: #f8f9fa; /* Un gris molt clar per diferenciar-lo del blanc de la calc */
-  padding: 2rem;
-  border-radius: 20px;
+  background-color: var(--color-primary-light);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
   height: fit-content;
-  border: 1px solid #e9ecef;
+  border: 2px solid var(--color-primary-hover);
+  box-shadow: var(--shadow);
 }
 
-#history-title {
-  font-size: 1.4rem;
-  color: #333;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-#history-title::before {
-  content: "📋"; /* Un icona discreta per donar context visual */
-  font-size: 1.2rem;
-}
-
-/* Contenidor per separar el cercador de la llista */
 app-budget-search {
   display: block;
   margin-bottom: 2rem;
 }
 
-/* Animació suau quan apareixen noves cards */
 app-budget-list {
   display: flex;
   flex-direction: column;

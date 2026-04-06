@@ -1,33 +1,37 @@
-<div class="sort-controls">
-  <span>Ordenar per:</span>
+<section class="filters-container" aria-labelledby="filters-title">
+  <h3 id="filters-title" class="sr-only">Filtres de cerca i ordenació</h3>
 
-  <button type="button" (click)="changeSort('date')" [class.active]="budgetService.sortBy() === 'date'">
-    Data
-    @if (budgetService.sortBy() === 'date') {
-    {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
-    }
-  </button>
+  <fieldset class="sort-controls">
+    <legend>Ordenar per:</legend>
 
-  <button type="button" (click)="changeSort('name')" [class.active]="budgetService.sortBy() === 'name'">
-    Nom
-    @if (budgetService.sortBy() === 'name') {
-    {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
-    }
-  </button>
+    <button type="button" (click)="changeSort('date')" [class.active]="budgetService.sortBy() === 'date'">
+      Data
+      @if (budgetService.sortBy() === 'date') {
+      {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
+      }
+    </button>
 
-  <button type="button" (click)="changeSort('amount')" [class.active]="budgetService.sortBy() === 'amount'">
-    Import
-    @if (budgetService.sortBy() === 'amount') {
-    {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
-    }
-  </button>
-</div>
+    <button type="button" (click)="changeSort('name')" [class.active]="budgetService.sortBy() === 'name'">
+      Nom
+      @if (budgetService.sortBy() === 'name') {
+      {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
+      }
+    </button>
 
-<div class="search-container">
-  <label for="search" class="sr-only">Cercar per nom</label><span class="search-icon">🔍</span>
-  <input id="search" type="text" placeholder="Cerca per nom de client" (input)="onSearch($event)">
-</div>
+    <button type="button" (click)="changeSort('amount')" [class.active]="budgetService.sortBy() === 'amount'">
+      Import
+      @if (budgetService.sortBy() === 'amount') {
+      {{ budgetService.sortOrder() === 'asc' ? '↑' : '↓' }}
+      }
+    </button>
+  </fieldset>
 
-<button type="button" (click)="budgetService.resetFilters()" class="btn-reset">
-  Netejar filtres
-</button>
+    <div class="search-container">
+      <label for="search" class="sr-only">Cercar per nom</label><span class="search-icon">🔍</span>
+      <input id="search" type="text" placeholder="Cerca per nom de client" (input)="onSearch($event)">
+    </div>
+
+    <button type="button" (click)="budgetService.resetFilters()" class="btn-reset">
+      Netejar filtres
+    </button>
+</section>
