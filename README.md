@@ -103,4 +103,4 @@ Accessibility is not an afterthought but a core technical requirement:
 ---
 
 ##### Author: Irene V. Sahun - GitHub: isahun  
-##### Created as part of the IT Academy Frontend BootCamp (Sprint 2).
+##### Created as part of the IT Academy Frontend BootCamp.
