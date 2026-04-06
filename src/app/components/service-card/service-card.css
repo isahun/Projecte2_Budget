@@ -1,15 +1,18 @@
 .service-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
   border: 2px solid var(--color-primary-hover);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: var(--space-lg);
   margin-bottom: 1rem;
   transition: all 0.3s ease;
   background-color: var(--color-primary-light);
   color: var(--color-primary-hover);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
 }
 
 /* El "glow" verd quan està seleccionada */
@@ -18,19 +21,34 @@
   background-color: #f9fffdfa;
 }
 
-.service-info h3 {
+.info {
+  flex: 1;
+}
+
+.info h3 {
   margin: 0;
   font-size: 1.2rem;
 }
 
+
 .price {
-  font-weight: bold;
-  font-size: 1.4rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  white-space: nowrap;
 }
 
 /* Estil per al checkbox accessible */
-.selection-area {
+.selection {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-sm);
+  min-width: fit-content;
+  margin-left: var(--space-sm)
+}
+
+.selection input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--clr-pri);
+  cursor: pointer;
 }

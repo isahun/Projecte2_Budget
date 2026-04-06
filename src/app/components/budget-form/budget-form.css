@@ -1,25 +1,29 @@
 .form-container {
-  background: var(--bg-card);
-  padding: 1.5rem;
-  border-radius: var(--radius);
+  background: var(--color-primary-light);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
+  border: 2px solid var(--color-primary-light);
+  margin-top: var(--space-lg);
 }
 
 .field {
   margin-bottom: 1.25rem;
+  text-align: left;
 }
 
 label {
   display: block;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  padding-left: var(--space-sm);
 }
 
 input {
   width: 100%;
   padding: 0.8rem;
-  border: 2px solid #ccc; /* Bordes més gruixuts per visibilitat */
-  border-radius: 8px;
+  border: 2px solid #ccc; 
+  border-radius: var(--radius-lg);
   font-size: 1rem;
 }
 
@@ -35,17 +39,17 @@ input:focus {
 }
 
 .btn-submit {
-  width: 100%;
   padding: 1rem;
   background-color: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   font-weight: 700;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   transition: background 0.2s;
+  max-width: 200px;
 }
 
 .btn-submit:hover:not(:disabled) { background-color: var(--primary-hover); }

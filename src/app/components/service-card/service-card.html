@@ -1,5 +1,4 @@
 <article class="service-card" [class.selected]="service.isSelected">
-  <div class="card-content">
     <div class="info">
       <h3>{{ service.name }}</h3>
       <p>{{ service.description }}</p>
@@ -14,6 +13,4 @@
       <input type="checkbox" [id]="service.id" [checked]="service.isSelected" (change)="toggleService()">
       <span>Afegir</span>
     </div>
-  </div>
-
 </article>
