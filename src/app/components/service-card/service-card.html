@@ -1,16 +1,19 @@
+<!-- [class.selected] afegeix la classe CSS 'selected' dinàmicament quan el servei està marcat. Això permet canviar l'estil de la targeta sencera quan està activa -->
 <article class="service-card" [class.selected]="service().isSelected">
-    <div class="info">
-      <h3>{{ service().name }}</h3>
-      <p>{{ service().description }}</p>
-    </div>
+  <div class="info">
+    <h3>{{ service().name }}</h3>
+    <p>{{ service().description }}</p>
+  </div>
 
-    <div class="price">
-      <span>{{ service().price }}€</span>
-    </div>
+  <div class="price">
+    <span>{{ service().price }}€</span>
+  </div>
 
-    <div class="selection">
-      <label [for]="service().id" class="sr-only"> Seleccionar {{ service().name }}</label>
-      <input type="checkbox" [id]="service().id" [checked]="service().isSelected" (change)="toggleService()">
-      <span>Afegir</span>
-    </div>
+  <div class="selection">
+    <label [for]="service().id" class="sr-only"> Seleccionar {{ service().name }}</label>
+
+    <!-- [checked] reflecteix l'estat actual del signal (és una binding unidireccional). (change) s'activa quan l'usuari marca/desmarca → crida toggleService() al .ts -->
+    <input type="checkbox" [id]="service().id" [checked]="service().isSelected" (change)="toggleService()">
+    <span>Afegir</span>
+  </div>
 </article>

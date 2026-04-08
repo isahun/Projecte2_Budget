@@ -1,7 +1,18 @@
 <section class="list-container">
+  <!-- Iterem sobre el signal budgets() rebut del pare via input. Per cada pressupost creem una budget-card -->
   @for (budget of budgets(); track budget.id) {
+
   <app-budget-card [budget]="budget" (deleteRequest)="onDeleteBudget($event)"></app-budget-card>
   } @empty {
+  <!-- S'executa si l'array budgets() està buit -->
   <p class="empty-msg">Encara no hi ha pressupostos guardats.</p>
   }
 </section>
+
+<!--
+- [budget]="budget" → passem l'objecte al fill via input
+
+- (deleteRequest)="onDeleteBudget($event)" → escoltem l'output del fill.
+
+- $event conté el valor emès: en aquest cas, l'id del pressupost a esborrar
+-->

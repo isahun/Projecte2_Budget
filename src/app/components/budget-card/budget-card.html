@@ -1,17 +1,24 @@
+<!-- Cada pressupost es representa com un article semàntic -->
 <article class="budget-item">
+
+  <!-- Informació del client -->
   <div class="client-info">
     <h3>{{ budget().clientName }}</h3>
     <p>{{ budget().clientEmail }}</p>
     <p>{{ budget().clientPhone }}</p>
     <p><small>{{ budget().date | date:'dd/MM/yyyy HH:mm' }}</small></p>
+    <!-- DatePipe formata el Date de JS a un string llegible: ex. 07/04/2025 14:32. La | és la sintaxi de pipes d'Angular: valor | tipusDePipe:'opcions' -->
   </div>
 
+  <!-- Llista dels serveis contractats en aquest pressupost -->
   <div class="services-list">
     <strong>Serveis contractats:</strong>
     <ul>
+      <!-- Iterem sobre els serveis d'aquest pressupost concret (no el signal global) -->
       @for (s of budget().services; track s.id){
       <li>
         {{ s.name }}
+        <!-- Només mostrem el detall de pàgines/idiomes si el servei és 'web' -->
         @if (s.id === 'web') {
         <span class="details">
           ({{ s.pages }} pàgines, {{ s.languages }} idiomes)
@@ -22,10 +29,12 @@
     </ul>
   </div>
 
+  <!-- Preu total del pressupost -->
   <div class="price-info">
     <p>Total: <strong>{{ budget().total }}€</strong></p>
   </div>
 
+  <!-- Botó d'esborrat: crida onDelete() que emetrà l'event cap al component pare -->
   <div class="card-delete">
     <button class="delete-icon" (click)="onDelete()">🗑️</button>
   </div>

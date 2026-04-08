@@ -1,17 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { BudgetService } from '../../services/budget-service';
 import { InfoModal } from '../info-modal/info-modal';
-import { INFO_MESSAGES } from '../../core/data/info-text';
+import { INFO_MESSAGES } from '../../core/data/info-text'; // Objecte amb els textos informatius dels modals
 
 @Component({
   selector: 'app-web-customizer',
-  imports: [InfoModal],
+  imports: [InfoModal], // Necessitem InfoModal perquè el fem servir al template
   templateUrl: './web-customizer.html',
   styleUrl: './web-customizer.css',
 })
 export class WebCustomizer {
-  public budgetService = inject(BudgetService);
+  public budgetService = inject(BudgetService); // public perquè el template accedeix a numPages() i numLanguages()
 
+  // Estat local del modal — no cal que visqui al servei perquè
+  // només afecta aquest component, cap altre el necessita
   isModalOpen = signal(false);
   modalText = signal('');
 
@@ -30,9 +32,12 @@ export class WebCustomizer {
   }
 
   openInfo(type: 'pages' | 'languages') {
+    // Recuperem el text corresponent de l'objecte de constants extern
+    // Així els textos estan centralitzats i no hardcodejats aquí
     const pagesMsg = INFO_MESSAGES.pages;
     const langMsg = INFO_MESSAGES.languages;
 
+     // Assignem el text correcte segons el tipus i obrim el modal
     if (type === 'pages') {
       this.modalText.set(pagesMsg);
     } else {

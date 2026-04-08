@@ -1,12 +1,17 @@
+<!-- role="group" + aria-labelledby agrupa els controls relacionats per accessibilitat, equivalent semàntic a un fieldset però per divs -->
 <div class="customizer-panel" role="group" aria-labelledby="customizer-title">
   <h4 id="customizer-title" class="sr-only">Personalització de la web</h4>
 
   <div class="control-group">
     <label for="pages">Número de pàgines</label>
+
+    <!-- Botó d'informació: obre el modal amb el text explicatiu de "pages" -->
     <button class="info-btn" type="button" (click)="openInfo('pages')">ⓘ</button>
 
     <div class="input-stepper">
+      <!-- Stepper: patró UI de +/- per incrementar/decrementar un valor numèric. L'input és readonly perquè l'usuari no pot escriure directament, només pot usar els botons — evitem valors inesperats -->
       <button type="button" (click)="updatePages(-1)" aria-label="Restar una pàgina">-</button>
+    <!-- [value] binding unidireccional: reflecteix el signal numPages() del servei -->
       <input type="number" id="pages" [value]="budgetService.numPages()" readonly>
       <button type="button" (click)="updatePages(1)" aria-label="Sumar una pàgina">+</button>
     </div>
@@ -23,6 +28,7 @@
     </div>
   </div>
 
+  <!-- El modal només existeix al DOM quan isModalOpen() és true. [text] li passa el text a mostrar, (close) escolta l'output del fill i tanca el modal posant isModalOpen a false directament des del template -->
   @if (isModalOpen()) {
   <app-info-modal [text]="modalText()" (close)="isModalOpen.set(false)" />
   }
