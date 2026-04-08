@@ -1,6 +1,7 @@
 import { supabase } from './../config/supabase.config';
 import { Injectable, signal, computed, inject } from '@angular/core';
-import { Service, Budget } from '../interfaces/budget-service.interface';
+import { Service } from '../interfaces/service.interface';
+import { Budget } from '../interfaces/budget.interface';
 import { services } from '../core/data/services-obj';
 import { SupabaseClient } from '@supabase/supabase-js';
 
@@ -10,18 +11,15 @@ import { SupabaseClient } from '@supabase/supabase-js';
 export class BudgetService {
   private supabase = inject(SupabaseClient);
 
-  // --- 1. ESTAT DE DADES REACTIVES---
   services = signal<Service[]>(services);
-  numPages = signal(1); //1 --> valor q apareix x defecte
+  numPages = signal(1);
   numLanguages = signal(1);
-  budgetHistory = signal<Budget[]>([]); //<Budget[]> defineix tipus, i ([]) estableix com a valor inicial del signal un array buit
+  budgetHistory = signal<Budget[]>([]);
 
-  // --- 2. ESTAT DE LA UI (Filtres/Ordre) ---
   searchTerm = signal<string>('');
   sortBy = signal<'date' | 'name' | 'amount'>('date');
   sortOrder = signal<'asc' | 'desc'>('desc');
 
-  // --- 3. CÀLCULS DERIVATS (Computed) ---
   totalPrice = computed(() => {
     let total = this.services()
       .filter((service) => service.isSelected)
@@ -67,17 +65,20 @@ export class BudgetService {
     return history.filter((b) => b.clientName.toLowerCase().includes(term));
   });
 
-  // --- 4. CONSTRUCTOR ---
   constructor() {
     this.fetchBudgets();
   }
 
-  // --- 5. MÈTODES D'ACCIÓ ---
   async fetchBudgets() {
     const { data, error } = await supabase
       .from('budgets')
       .select('*')
       .order('created_at', { ascending: false });
+
+    if(error) {
+      console.error(error.message);
+      return;
+    }
 
     if (data) {
       const mappedBudgets: Budget[] = data.map((b: any) => ({
@@ -105,7 +106,7 @@ export class BudgetService {
     ]);
 
     if (!error) {
-      await this.fetchBudgets(); // Refresquem la llista
+      await this.fetchBudgets(); 
     }
   }
 
