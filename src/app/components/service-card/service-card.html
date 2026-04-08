@@ -1,16 +1,16 @@
-<article class="service-card" [class.selected]="service.isSelected">
+<article class="service-card" [class.selected]="service().isSelected">
     <div class="info">
-      <h3>{{ service.name }}</h3>
-      <p>{{ service.description }}</p>
+      <h3>{{ service().name }}</h3>
+      <p>{{ service().description }}</p>
     </div>
 
     <div class="price">
-      <span>{{ service.price }}€</span>
+      <span>{{ service().price }}€</span>
     </div>
 
     <div class="selection">
-      <label [for]="service.id" class="sr-only"> Seleccionar {{ service.name }}</label>
-      <input type="checkbox" [id]="service.id" [checked]="service.isSelected" (change)="toggleService()">
+      <label [for]="service().id" class="sr-only"> Seleccionar {{ service.name }}</label>
+      <input type="checkbox" [id]="service().id" [checked]="service().isSelected" (change)="toggleService()">
       <span>Afegir</span>
     </div>
 </article>
