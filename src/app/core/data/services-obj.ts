@@ -1,4 +1,4 @@
-import { Service } from '../../interfaces/budget-service.interface';
+import { Service } from '../../interfaces/service.interface';
 
 export const services: Service[] = [
   {

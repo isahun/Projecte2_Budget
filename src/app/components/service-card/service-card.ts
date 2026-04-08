@@ -1,5 +1,5 @@
 import { Component, input, inject } from '@angular/core';
-import { Service } from '../../interfaces/budget-service.interface';
+import { Service } from '../../interfaces/service.interface';
 import { BudgetService } from '../../services/budget-service';
 import { CommonModule } from '@angular/common';
 

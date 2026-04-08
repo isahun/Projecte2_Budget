@@ -1,6 +1,6 @@
 import { Component, input, inject } from '@angular/core';
 import { BudgetCard } from '../budget-card/budget-card';
-import { Budget } from '../../interfaces/budget-service.interface';
+import { Budget } from '../../interfaces/budget.interface';
 import { BudgetService } from '../../services/budget-service';
 
 @Component({
