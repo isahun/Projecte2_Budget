@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 import { Service } from '../../interfaces/budget-service.interface';
 import { BudgetService } from '../../services/budget-service';
 import { CommonModule } from '@angular/common';
@@ -10,11 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './service-card.css',
 })
 export class ServiceCard {
-  @Input({ required: true }) service!: Service;
-
+  service = input.required<Service>();
   private budgetService = inject(BudgetService);
 
   toggleService() {
-    this.budgetService.updateServiceSelection(this.service.id);
+    this.budgetService.updateServiceSelection(this.service().id);
     }
 }
