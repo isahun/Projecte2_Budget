@@ -9,7 +9,7 @@
     </div>
 
     <div class="selection">
-      <label [for]="service().id" class="sr-only"> Seleccionar {{ service.name }}</label>
+      <label [for]="service().id" class="sr-only"> Seleccionar {{ service().name }}</label>
       <input type="checkbox" [id]="service().id" [checked]="service().isSelected" (change)="toggleService()">
       <span>Afegir</span>
     </div>
