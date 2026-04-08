@@ -8,6 +8,17 @@ export const services: Service[] = [
     price: 300,
     isSelected: false,
   },
-  { id: 'ads', name: 'Publicitat', description: 'Campanyes de SEM', price: 400, isSelected: false },
-  { id: 'web', name: 'Web', description: 'Programació a mida', price: 500, isSelected: false },
+  {
+    id: 'ads',
+    name: 'Publicitat',
+    description: 'Campanyes de SEM',
+    price: 400,
+    isSelected: false },
+  {
+    id: 'web',
+    name: 'Web',
+    description: 'Programació a mida',
+    price: 500,
+    isSelected: false
+  },
 ];

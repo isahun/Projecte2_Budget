@@ -10,7 +10,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 export class BudgetService {
   private supabase = inject(SupabaseClient);
 
-  // --- 1. ESTAT DE DADES ---
+  // --- 1. ESTAT DE DADES REACTIVES---
   services = signal<Service[]>(services);
   numPages = signal(1); //1 --> valor q apareix x defecte
   numLanguages = signal(1);
@@ -121,7 +121,6 @@ export class BudgetService {
     }
     this.budgetHistory.update(budgets => budgets.filter(b => b.id !== id));
     }
-
 
   updateServiceSelection(id: string) {
     this.services.update((prevServices) =>

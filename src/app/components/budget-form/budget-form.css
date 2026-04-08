@@ -22,13 +22,18 @@ label {
 input {
   width: 100%;
   padding: 0.8rem;
-  border: 2px solid #ccc; 
+  border: 2px solid #ccc;
   border-radius: var(--radius-lg);
   font-size: 1rem;
 }
 
 input:focus {
   border-color: var(--color-primary);
+}
+
+span {
+    padding-left: var(--space-sm);
+    padding-top: var(--space-sm);
 }
 
 .error-message {
