@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoModal } from './info-modal';
+import { mockBudgetServiceProvider } from '../../testing/mocks';
 
 describe('InfoModal', () => {
   let component: InfoModal;
@@ -9,6 +10,7 @@ describe('InfoModal', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InfoModal],
+      providers: [mockBudgetServiceProvider]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InfoModal);

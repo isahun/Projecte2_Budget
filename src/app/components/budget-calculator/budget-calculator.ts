@@ -7,7 +7,6 @@ import { WebCustomizer } from '../web-customizer/web-customizer';
   selector: 'app-budget-calculator',
   imports: [ServiceCard, WebCustomizer],
   templateUrl: './budget-calculator.html',
-  styleUrl: './budget-calculator.css',
 })
 export class BudgetCalculator {
   public budgetService = inject(BudgetService);

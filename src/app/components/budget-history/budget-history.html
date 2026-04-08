@@ -3,5 +3,22 @@
 
   <app-budget-search></app-budget-search>
 
-  <app-budget-list [budgets]="budgetService.filteredBudgets()"></app-budget-list>
+  <!-- Mentre Supabase carrega les dades, mostrem feedback a l'usuari -->
+  @if (budgetService.isLoading()) {
+  <p class="loading-msg">Carregant pressupostos...</p>
+
+  } @else if (budgetService.error()) {
+    <div class="status-container error-msg" role="alert">
+      <p>⚠️ {{ budgetService.error() }}</p>
+      <button type="button" (click)="budgetService.fetchBudgets()" class="btn-retry">
+        Tornar-ho a intentar
+      </button>
+    </div>
+
+  } @else {
+    @if (budgetService.filteredBudgets().length > 0) {
+  <app-budget-list [budgets]="budgetService.filteredBudgets()"></app-budget-list>} @else {
+    <p class="empty-msg">No s'ha trobat cap pressupost amb aquests filtres.</p>
+  }
+}
 </aside>

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BudgetCard } from './budget-card';
+import { mockBudgetServiceProvider } from '../../testing/mocks';
 
 describe('BudgetCard', () => {
   let component: BudgetCard;
@@ -9,6 +10,7 @@ describe('BudgetCard', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BudgetCard],
+      providers: [mockBudgetServiceProvider]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BudgetCard);

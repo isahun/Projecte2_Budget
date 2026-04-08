@@ -3,18 +3,22 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { Service } from '../interfaces/service.interface';
 import { Budget } from '../interfaces/budget.interface';
 import { services } from '../core/data/services-obj';
-import { SupabaseClient } from '@supabase/supabase-js';
+import { BudgetApiService } from './budget-api.service';
+import { BudgetMapper } from '../core/mappers/budget.mapper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetService {
-  private supabase = inject(SupabaseClient);
+  private api = inject(BudgetApiService);
 
   services = signal<Service[]>(services);
   numPages = signal(1);
   numLanguages = signal(1);
   budgetHistory = signal<Budget[]>([]);
+
+  isLoading = signal(false);
+  error = signal<string | null>(null);
 
   searchTerm = signal<string>('');
   sortBy = signal<'date' | 'name' | 'amount'>('date');
@@ -41,28 +45,17 @@ export class BudgetService {
       history = history.filter((b) => b.clientName.toLowerCase().includes(term));
     }
 
-    history.sort((a, b) => {
+    return history.sort((a, b) => {
+      const order = this.sortOrder() === 'desc' ? -1 : 1;
+
       if (this.sortBy() === 'date') {
-        return this.sortOrder() === 'desc'
-          ? b.date.getTime() - a.date.getTime()
-          : a.date.getTime() - b.date.getTime();
+        return (a.date.getTime() - b.date.getTime()) * order;
       }
-
       if (this.sortBy() === 'amount') {
-        return this.sortOrder() === 'desc' ? b.total - a.total : a.total - b.total;
+        return (a.total - b.total) * order;
       }
-
-      if (this.sortBy() === 'name') {
-        const comparison = a.clientName.localeCompare(b.clientName);
-        return this.sortOrder() === 'asc' ? comparison : comparison * -1;
-      }
-
-      return 0;
+      return a.clientName.localeCompare(b.clientName) * order;
     });
-
-    if (!term) return history;
-
-    return history.filter((b) => b.clientName.toLowerCase().includes(term));
   });
 
   constructor() {
@@ -70,64 +63,54 @@ export class BudgetService {
   }
 
   async fetchBudgets() {
-    const { data, error } = await supabase
-      .from('budgets')
-      .select('*')
-      .order('created_at', { ascending: false });
+    this.isLoading.set(true);
+    this.error.set(null);
 
-    if(error) {
-      console.error(error.message);
-      return;
-    }
+    try {
+      const { data, error } = await this.api.getBudgets();
+      if (error) throw error;
 
-    if (data) {
-      const mappedBudgets: Budget[] = data.map((b: any) => ({
-        id: b.id,
-        clientName: b.client_name,
-        clientEmail: b.client_email,
-        clientPhone: b.client_phone,
-        total: b.total,
-        services: b.services,
-        date: new Date(b.created_at),
-      }));
-      this.budgetHistory.set(mappedBudgets);
+      const mapped = (data || []).map(BudgetMapper.fromRemote);
+      this.budgetHistory.set(mapped);
+    } catch (err: any) {
+      this.error.set(`Error carregant historial: ${err.message}`);
+    } finally {
+      this.isLoading.set(false);
     }
   }
 
   async addBudget(newBudget: Budget) {
-    const { error } = await supabase.from('budgets').insert([
-      {
-        client_name: newBudget.clientName,
-        client_email: newBudget.clientEmail,
-        client_phone: newBudget.clientPhone,
-        total: newBudget.total,
-        services: newBudget.services,
-      },
-    ]);
-
-    if (!error) {
-      await this.fetchBudgets(); 
+    this.isLoading.set(true);
+    try {
+      const remoteData = BudgetMapper.toRemote(newBudget);
+      const { error } = await this.api.saveBudget(remoteData);
+      if (error) throw error;
+      await this.fetchBudgets();
+    } catch (err: any) {
+      this.error.set(`Error en guardar: ${err.message}`);
+    } finally {
+      this.isLoading.set(false);
     }
   }
 
   async deleteBudget(id: number) {
-    const { error } = await this.supabase
-    .from('budgets')
-    .delete()
-    .eq('id', id);
+    this.isLoading.set(true);
 
-    if (error) {
-      console.error('Error en esborrar:', error);
-      return;
+    try {
+      const { error } = await this.api.deleteBudget(id);
+      if (error) throw error;
+
+      this.budgetHistory.update((budgets) => budgets.filter((b) => b.id !== id));
+    } catch (err: any) {
+      this.error.set(`Error en esborrar: ${err.message}`);
+    } finally {
+      this.isLoading.set(false);
     }
-    this.budgetHistory.update(budgets => budgets.filter(b => b.id !== id));
-    }
+  }
 
   updateServiceSelection(id: string) {
     this.services.update((prevServices) =>
-      prevServices.map((s) =>
-        s.id === id ? { ...s, isSelected: !s.isSelected } : s,
-      ),
+      prevServices.map((s) => (s.id === id ? { ...s, isSelected: !s.isSelected } : s)),
     );
   }
 
