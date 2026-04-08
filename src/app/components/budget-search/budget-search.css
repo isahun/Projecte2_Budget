@@ -4,7 +4,7 @@
   justify-content: space-between;
   gap: var(--space-sm);
   flex-wrap: wrap;
-  padding: var(--s-md) 0;
+  padding: var(--space-md) 0;
 }
 
 .sort-controls {
@@ -53,5 +53,5 @@
 
 .btn-reset {
   margin-top: var(--space-lg);
-  white-space: nowrap; 
+  white-space: nowrap;
 }

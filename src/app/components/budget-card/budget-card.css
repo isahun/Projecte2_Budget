@@ -6,7 +6,7 @@
   box-shadow: var(--shadow);
   border-left: 4px solid var(--color-primary-hover);
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .client-info h3 { margin: 0; font-size: 1.2rem; }
-.total-amount { font-size: 1.5rem; font-weight: 800; color: var(--text-main); }
+.total-amount { font-size: 1.5rem; font-weight: 800; color: var(--color-text); }
 
 .delete-icon {
   background: none;
