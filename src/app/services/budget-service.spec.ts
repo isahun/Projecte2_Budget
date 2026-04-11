@@ -1,11 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { BudgetService } from './budget-service';
+import { BudgetApiService } from './budget-api.service';
+
+const mockApiService = {
+  getBudgets: () => Promise.resolve({ data:[], error: null }),
+  saveBudget: () => Promise.resolve({ data: null, error: null }),
+  deleteBudget: () => Promise.resolve({ error: null }),
+};
 
 describe('BudgetService - Gherkin Scenarios', () => {
   let service: BudgetService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: BudgetApiService, useValue: mockApiService }]
+    });
     service = TestBed.inject(BudgetService);
   });
 
