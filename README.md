@@ -25,7 +25,7 @@ A high-performance, reactive budget management system built with **Angular 21+**
 
 - **Framework:** Angular 21+ (Standalone Architecture)
 - **Backend-as-a-Service:** Supabase (Database & Auth)
-- **Testing:** Vitest
+- **Testing:** Vitest (via Angular's `@angular/build:unit-test` pipeline)
 - **Language:** TypeScript
 - **Styling:** Modern CSS with Custom Properties (Design Tokens)
 - **State Pattern:** Service-driven state (Smart Service) providing computed signals to presentational components.
@@ -44,7 +44,10 @@ A high-performance, reactive budget management system built with **Angular 21+**
 | `src/app/components/budget-search/` | Semantic filtering UI for searching and sorting the history. |
 | `src/app/components/budget-list/` | Reactive container that loops through the filtered budget collection. |
 | `src/app/components/budget-card/` | Display card for a single entry in the budget history list. |
-| `src/app/services/` | **BudgetService**: The core logic provider; manages Signals and Supabase CRUD. |
+| `src/app/services/budget-service.ts` | Core state: Signals, `computed` totals, filter/sort logic. |
+| `src/app/services/budget-api.service.ts` | Supabase CRUD layer — isolates all HTTP calls from business logic. |
+| `src/app/core/mappers/budget.mapper.ts` | Transforms between Supabase `snake_case` and TypeScript `camelCase`. |
+| `src/app/testing/mocks.ts` | Shared `mockBudgetServiceProvider` used by all component specs. |
 | `src/app/core/data/` | Static data definitions (initial services, info texts). |
 | `src/app/interfaces/` | TypeScript contracts and data models (Budget, Service). |
 | `src/app/config/` | Infrastructure setup, including Supabase client initialization. |
@@ -74,8 +77,15 @@ Create a configuration file to link your Supabase project:
 
 ### 4. Development Server
 Run the local dev server:
-`ng serve`
+`npm start`
 Navigate to `http://localhost:4200/`.
+
+### 5. Run Tests
+```bash
+npm test
+# or open the interactive Vitest UI:
+npm run test:ui
+```
 
 ---
 
@@ -99,6 +109,15 @@ Accessibility is not an afterthought but a core technical requirement:
 * **Logical Grouping:** Complex controls like sorting buttons are grouped within `<fieldset>` and described by `<legend>` for screen-reader clarity.
 * **Visual Context:** Use of `aria-labelledby` and `aria-describedby` to link UI labels with their respective input groups.
 * **Screen Reader Utilities:** A specialized `.sr-only` class ensures that descriptive text (like "Select SEO Service") is available for assistive technology while maintaining a clean visual interface.
+
+---
+
+## Branch Strategy
+
+| Branch | Purpose |
+| :--- | :--- |
+| `main` | Production-ready code — clean, no explanatory comments |
+| `commented-code` | Educational copy of `main` with in-depth comments on the trickiest patterns |
 
 ---
 
