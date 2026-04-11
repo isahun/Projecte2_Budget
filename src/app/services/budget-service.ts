@@ -1,4 +1,3 @@
-import { supabase } from './../config/supabase.config';
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { Service } from '../interfaces/service.interface';
 import { Budget } from '../interfaces/budget.interface';
@@ -88,6 +87,7 @@ export class BudgetService {
       await this.fetchBudgets();
     } catch (err: any) {
       this.error.set(`Error en guardar: ${err.message}`);
+      throw err;
     } finally {
       this.isLoading.set(false);
     }
