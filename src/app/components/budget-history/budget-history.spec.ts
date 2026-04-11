@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BudgetHistory } from './budget-history';
+import { mockBudgetServiceProvider } from '../../testing/mocks';
 
 describe('BudgetHistory', () => {
   let component: BudgetHistory;
@@ -9,6 +10,7 @@ describe('BudgetHistory', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BudgetHistory],
+      providers: [mockBudgetServiceProvider]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BudgetHistory);

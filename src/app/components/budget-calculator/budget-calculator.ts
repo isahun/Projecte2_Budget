@@ -13,7 +13,6 @@ import { BudgetService } from '../../services/budget-service';
   selector: 'app-budget-calculator', // Etiqueta HTML per usar aquest component: <app-budget-calculator>
   imports: [ServiceCard, WebCustomizer], // Components fills que fem servir al template — cal declarar-los aquí
   templateUrl: './budget-calculator.html',
-  styleUrl: './budget-calculator.css',
 })
 export class BudgetCalculator {
   public budgetService = inject(BudgetService);

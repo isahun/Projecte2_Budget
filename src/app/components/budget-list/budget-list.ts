@@ -8,7 +8,6 @@ import { BudgetService } from '../../services/budget-service';
   selector: 'app-budget-list',
   imports: [BudgetCard], // Cal declarar BudgetCard aquí perquè el fem servir al template
   templateUrl: './budget-list.html',
-  styleUrl: './budget-list.css',
 })
 export class BudgetList {
   // Rep la llista de pressupostos del component pare (ja filtrada i ordenada).

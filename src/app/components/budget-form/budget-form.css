@@ -57,5 +57,5 @@ span {
   max-width: 200px;
 }
 
-.btn-submit:hover:not(:disabled) { background-color: var(--primary-hover); }
+.btn-submit:hover:not(:disabled) { background-color: var(--color-primary-hover); }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
